@@ -29,6 +29,14 @@ MongoDB mein ek user create karein aur uski role `admin` karein:
 db.users.updateOne({email: "aapka@email.com"}, {$set: {role: "admin"}})
 ```
 
+### 🌱 Demo Data (Categories + Products + Offers)
+Pehli baar mein puri site khali dikhegi — ye seed script chalayen:
+```bash
+cd backend
+node scripts/seedData.js   # 12 categories + 14 products + 6 offers (images = Pexels CDN)
+```
+> Note: Images direct Pexels URL se aati hain kyunki Cloudinary account (`dxktbrl3e`) abhi **disabled** hai. Cloudinary re-enable karne ke baad admin panel se upload karna + seed script Cloudinary ke sath bhi chalega.
+
 ## 📱 Pages
 
 ### Public
@@ -55,6 +63,13 @@ db.users.updateOne({email: "aapka@email.com"}, {$set: {role: "admin"}})
 | `/admin/issues` | Customer issues |
 | `/admin/offers` | Special occasion offers (Diwali, Holi, Birthday, New Year) |
 | `/admin/stats` | Full statistics & graphs |
+
+## 🎁 Offers — Fields & Layouts
+Admin `/admin/offers` par naya offer banate waqt ye fields hain:
+- **Start Date (Shuruaat)** — khali chhodein = aaj se shuru. Kal / parso se shuru karne ke liye wo date daalein.
+- **Last Date (Valid Till)** — aakhri tarikh. Khali chhodein = koi limit nahi.
+- **Offer Image (optional)** — image ke bina = gradient card. Image + description = **half image / half content** card. Sirf image = **background image** card (content overlay ke saath).
+- Public page par sirf wo offers dikhte hain jo **start ho chuke hain aur expire nahi hue** (future/expired offers sirf admin list mein dikhte hain).
 
 ## 🔔 Admin Notification Service
 - Jab bhi koi naya order ya custom cake request aata hai, backend admin ko email bhejta hai (`ADMIN_EMAIL`).

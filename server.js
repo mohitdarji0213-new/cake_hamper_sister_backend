@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
   origin: [
     ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : []),
-    'http://localhost:5173'
+    'http://localhost:5174'
   ],
   credentials: true
 }))
