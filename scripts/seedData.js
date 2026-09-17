@@ -60,7 +60,7 @@ const DESIGNS = [
   { name: 'Birthday Cakes', icon: '🎂', desc: 'Birthday par candles, sprinkles aur dher saari khushi', image: pexels(3952063), order: 1 },
   { name: 'Wedding Cakes',  icon: '💍', desc: 'Royal multi-tier wedding cakes',                          image: pexels(1126359), order: 2 },
   { name: 'Photo Cakes',    icon: '🖼️', desc: 'Apni photo ke saath personalised cake',                     image: pexels(1026253), order: 3 },
-  { name: 'Theme Cakes',    icon: '🎉', desc: 'Cartoon se lekar designer themes tak',                      image: pexels(8764563), order: 4 },
+  { name: 'Theme Cakes',    icon: '🎉', desc: 'Cartoon se lekar designer themes tak',                      image: pexels(941861),  order: 4 },
   { name: 'Cupcakes',       icon: '🧁', desc: 'Mini cupcakes parties ki jaan',                               image: pexels(5743280), order: 5 },
   { name: 'Pastries',       icon: '🍰', desc: 'Assorted pastries box',                                    image: pexels(5737911), order: 6 },
 ];
@@ -76,10 +76,10 @@ const PRODUCTS = [
   { name: 'Black Forest Cherry Surprise',      desc: 'Chocolate sponge, fresh cream aur cherry topping classic Black Forest jo kabhi faila nahi hota.',                  price: 949,  originalPrice: 1199, cat: 'Black Forest',  tags: ['black-forest', 'cherry', 'chocolate'], image: pexels(531880), isNew: true,  isFeatured: false, stock: 9,  rating: 4.7, numReviews: 31 },
   { name: 'Butterscotch Crunch Caramel Cake',  desc: 'Butterscotch crunch aur caramel drizzle ke saath mithaas ka naya level.',                                      price: 849,  originalPrice: 1099, cat: 'Butterscotch',  tags: ['butterscotch', 'caramel', 'crunch'], image: pexels(264940), isNew: true,  isFeatured: false, stock: 14, rating: 4.4, numReviews: 17 },
   { name: 'Pineapple Honey Layer Cake',        desc: 'Juicy pineapple chunks, honey glaze aur fluffy cream layers.',                                                 price: 799,  originalPrice: 999,  cat: 'Pineapple',     tags: ['pineapple', 'honey', 'cream'],   image: pexels(357573),  isNew: false, isFeatured: false, stock: 13, rating: 4.3, numReviews: 15 },
-  { name: 'Designer Theme Cake',               desc: 'Cartoon character, floral ya designer theme batao bas, hum bana denge bilkul waisa!',                           price: 1599, originalPrice: 1999, cat: 'Theme Cakes',   tags: ['theme', 'designer', 'cartoon'],   image: pexels(8764563), isNew: true,  isFeatured: false, stock: 6,  rating: 4.6, numReviews: 12 },
+  { name: 'Designer Theme Cake',               desc: 'Cartoon character, floral ya designer theme batao bas, hum bana denge bilkul waisa!',                           price: 1599, originalPrice: 1999, cat: 'Theme Cakes',   tags: ['theme', 'designer', 'cartoon'],   image: pexels(941861),  isNew: true,  isFeatured: false, stock: 6,  rating: 4.6, numReviews: 12 },
   { name: 'Chocolate Cupcake Party Box',       desc: '6 delicious chocolate cupcakes, ek stylish box mein party hogi kamaal ki!',                                    price: 599,  originalPrice: 749,  cat: 'Cupcakes',      tags: ['cupcake', 'party', 'box'],        image: pexels(5743280), isNew: true,  isFeatured: false, stock: 20, rating: 4.5, numReviews: 26 },
   { name: 'Assorted Pastry Box (12 pcs)',      desc: 'Chocolate, vanilla, strawberry 12 assorted pastries ek hi box mein. Party / office ke liye best.',              price: 449,  originalPrice: 599,  cat: 'Pastries',      tags: ['pastry', 'assorted', 'box'],      image: pexels(5737911), isNew: false, isFeatured: true,  stock: 25, rating: 4.6, numReviews: 22 },
-  { name: 'Cheesecake Delight Slice',          desc: 'Creamy New York style cheesecake slice coffee ke saath perfect combo.',                                          price: 559,  originalPrice: 699,  cat: 'Chocolate',    tags: ['cheesecake', 'chocolate'],        image: pexels(667082),  isNew: true,  isFeatured: false, stock: 10, rating: 4.7, numReviews: 19 },
+  { name: 'Cheesecake Delight Slice',          desc: 'Creamy New York style cheesecake slice coffee ke saath perfect combo.',                                          price: 559,  originalPrice: 699,  cat: 'Chocolate',    tags: ['cheesecake', 'chocolate'],        image: pexels(3731613), isNew: true,  isFeatured: false, stock: 10, rating: 4.7, numReviews: 19 },
 ];
 
 async function run() {
@@ -124,13 +124,16 @@ async function run() {
   }
 
   const today = new Date();
+  // User request: SAARE offers active rahein — start past mein, end 1 saal aage
+  const offerStart = addDays(today, -30);
+  const offerEnd = addDays(today, 365);
   const offers = [
-    { title: 'Diwali Dhamaka Sale', description: 'Deepawali par saare cakes par 25% tak ki dhamakedar chhut! Apne pariwar ko cake ka tohfa dijiye.', occasion: 'diwali', discountPercent: 25, code: 'DIWALI25', image: pexels(3026804), validFrom: addDays(today, 1), validTill: addDays(today, 16) },
-    { title: 'Birthday Boss Special', description: 'Birthday par jitna jashn, utni chhut 20% OFF sirf is hafte. Chocolate drip cakes se party shuru!', occasion: 'birthday', discountPercent: 20, code: 'BIRTHDAY20', image: pexels(376464), validFrom: today, validTill: addDays(today, 7) },
-    { title: 'New Year Fresh Start', description: 'Naye saal ki shuruaat meethi karein 30% OFF hamare special cakes par.', occasion: 'new_year', discountPercent: 30, code: 'NEWYEAR30', image: pexels(4705556), validFrom: addDays(today, 2), validTill: addDays(today, 20) },
-    { title: 'Chocolate Lovers Weekend', description: 'Weekend hai toh chocolate hai! Har chocolate cake par 15% chhut.', occasion: 'other', discountPercent: 15, code: 'CHOCO15', image: '', validFrom: today, validTill: addDays(today, 5) },
-    { title: 'Valentine Couple Deal', description: 'Pyaar ka izhaar cake se karein couple cakes par 10% OFF.', occasion: 'valentine', discountPercent: 10, code: 'LOVE10', image: '', validFrom: addDays(today, 7), validTill: addDays(today, 14) },
-    { title: 'Christmas Treat Offer', description: 'Christmas par hamare special winter cakes par 20% off yeh offer abhi expire ho gaya hai.', occasion: 'christmas', discountPercent: 20, code: 'XMAS20', image: pexels(5737911), validFrom: addDays(today, -15), validTill: addDays(today, -2) },
+    { title: 'Diwali Dhamaka Sale', description: 'Deepawali par saare cakes par 25% tak ki dhamakedar chhut! Apne pariwar ko cake ka tohfa dijiye.', occasion: 'diwali', discountPercent: 25, code: 'DIWALI25', image: pexels(3026804), validFrom: offerStart, validTill: offerEnd },
+    { title: 'Birthday Boss Special', description: 'Birthday par jitna jashn, utni chhut 20% OFF sirf is hafte. Chocolate drip cakes se party shuru!', occasion: 'birthday', discountPercent: 20, code: 'BIRTHDAY20', image: pexels(376464), validFrom: offerStart, validTill: offerEnd },
+    { title: 'New Year Fresh Start', description: 'Naye saal ki shuruaat meethi karein 30% OFF hamare special cakes par.', occasion: 'new_year', discountPercent: 30, code: 'NEWYEAR30', image: pexels(4705556), validFrom: offerStart, validTill: offerEnd },
+    { title: 'Chocolate Lovers Weekend', description: 'Weekend hai toh chocolate hai! Har chocolate cake par 15% chhut.', occasion: 'other', discountPercent: 15, code: 'CHOCO15', image: '', validFrom: offerStart, validTill: offerEnd },
+    { title: 'Valentine Couple Deal', description: 'Pyaar ka izhaar cake se karein couple cakes par 10% OFF.', occasion: 'valentine', discountPercent: 10, code: 'LOVE10', image: '', validFrom: offerStart, validTill: offerEnd },
+    { title: 'Christmas Treat Offer', description: 'Christmas par hamare special winter cakes par 20% off.', occasion: 'christmas', discountPercent: 20, code: 'XMAS20', image: pexels(5737911), validFrom: offerStart, validTill: offerEnd },
   ];
 
   for (const o of offers) {
